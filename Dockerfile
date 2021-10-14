@@ -1,0 +1,10 @@
+FROM php:7.4-apache
+
+RUN a2enmod rewrite
+COPY $SRC_APACHE_CONF $DEST_APACHE_CONF
+COPY $SRC_PHP_INI $DEST_PHP_INI
+
+WORKDIR $DEST_APACHE_PUBLIC_DIR
+COPY ./src/public .
+
+RUN service apache2 restart
